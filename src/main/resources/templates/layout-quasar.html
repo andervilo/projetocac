@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
+
+    <title>Centr</title>
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.0/dist/umd/quasar.mat.min.css" rel="stylesheet" type="text/css">
+
+    <style type="text/css">
+     
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.0/dist/umd/quasar.mat.umd.min.js"></script>
+   <!--
+    <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.0/dist/umd/i18n.pt_br.umd.min.js"></script>
+  -->
+    <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.0/dist/umd/icons.fontawesome.umd.min.js"></script>
+    <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/http-vue-loader"></script>
+  </head>
+  <body>
+    <div id="q-app">
+      <q-layout view="lHh Lpr fff">
+        <q-layout-header>
+          <q-toolbar
+          color="secondary" inverted
+          >
+            <q-btn flat round dense @click="drawerState = !drawerState" icon="fas fa-bars"></q-btn>
+
+            <q-toolbar-title>
+              Centro Alternativo de Cultura
+              <div slot="subtitle">Sistema de Gestão-v1.0.0</div>
+            </q-toolbar-title>
+          </q-toolbar>
+        </q-layout-header>
+
+        <q-layout-drawer
+          v-model="drawerState"
+          :content-class="$q.theme === 'mat' ? 'bg-teal' : null"
+          :width="250"
+        >
+          <q-list no-border link inset-delimiter>
+            <q-list-header class="text-white">Essential Links</q-list-header>
+
+            
+            <q-item href="#">
+              <q-item-side color="white" icon="fas fa-graduation-cap"></q-item-side>
+              <q-item-main class="text-white" label="Docs" ></q-item-main>
+            </q-item>
+            
+            
+            <q-item class="text-white">
+              <q-item-side color="white" icon="fas fa-comments"></q-item-side>
+              <q-item-main  >
+                <a style="text-decoration: none;" href="#" class="text-white">Discord Chat Channel</a>
+              </q-item-main>
+            </q-item>
+            <q-item class="text-white" @click.native="launch('http://forum.quasar-framework.org')">
+              <q-item-side color="white" icon="far fa-clipboard"></q-item-side>
+              <q-item-main label="Forum" ></q-item-main>
+            </q-item>
+            <q-item class="text-white" @click.native="launch('https://twitter.com/quasarframework')">
+              <q-item-side color="white" icon="fab fa-twitter"></q-item-side>
+              <q-item-main label="Twitter" ></q-item-main>
+            </q-item>
+          </q-list>
+        </q-layout-drawer>
+	
+	<q-layout layout:fragment="content">
+		
+		
+	</q-layout>
+    </div>
+    
+
+    
+    
+
+    <script>
+      Quasar.i18n.set(Quasar.i18n.pt_br)
+      Quasar.icons.set(Quasar.icons.fontawesome)
+      
+      	httpVueLoader.register(Vue, 'js/components/component-input.vue');
+    	httpVueLoader.register(Vue, 'js/components/component-photo.vue');
+    	httpVueLoader.register(Vue, 'js/components/component-colaborador.vue');
+ 
+
+   		var app = new Vue({
+        el: '#q-app',
+        data: function () {
+          return {
+            version: Quasar.version,
+            separator: 'horizontal',
+            drawerState: true  
+            
+          }
+        },
+        methods: {
+          launch: function (url) {
+            Quasar.utils.openURL(url)
+          }
+        },
+        mounted() {
+            //productService.findAll(r => {this.tableData = r.data})
+          },
+          components: [
+              'component-input', 'component-photo', 'component-colaborador'
+            ]
+      })
+       
+    </script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
