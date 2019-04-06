@@ -3,8 +3,11 @@
         <q-page padding>
                 <div class="q-headline text-weight-light">Novo Colaborador</div>
             <div class="row">	            
-                <div class="col-12 q-px-md">
+                <div class="col-sm-8 col-md-8 col-xs-12 q-px-md">
                     <q-input  v-model="colaborador.nome" float-label="Nome"   />
+                </div> 
+                <div class="col-sm-4 col-md-4 col-xs-12 q-px-md">
+                    <q-input  v-model="colaborador.cpfOuCnpj" float-label="CPF/CNPJ"   />
                 </div> 
                 <div class="col-sm-5 col-md-5 col-xs-12 q-px-md">
                     <q-input  v-model="colaborador.logradouro" float-label="Endereço"   />
@@ -51,6 +54,7 @@
               celular:"",
               email:"",
               profissao:"",
+              cpfOuCnpj:""
             }
 
       }
