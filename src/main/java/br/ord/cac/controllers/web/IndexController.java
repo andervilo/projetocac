@@ -1,4 +1,4 @@
-package br.ord.cac.controllers;
+package br.ord.cac.controllers.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +31,13 @@ public class IndexController  {
 	@GetMapping("/colaboradores")
 	public String colaboradores() {
 		
-		return "colaboradores";
+		return "colaboradores/list";
+	}
+	
+	@GetMapping("/colaboradores/novo")
+	public String colaboradoresNovo() {
+		
+		return "colaboradores/create";
 	}
 	
 	@GetMapping("/doacoes")

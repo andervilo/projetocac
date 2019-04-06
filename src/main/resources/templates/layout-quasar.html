@@ -19,14 +19,7 @@
     <style type="text/css">
      
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.0/dist/umd/quasar.mat.umd.min.js"></script>
-   <!--
-    <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.0/dist/umd/i18n.pt_br.umd.min.js"></script>
-  -->
-    <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.0/dist/umd/icons.fontawesome.umd.min.js"></script>
-    <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/http-vue-loader"></script>
+    
   </head>
   <body>
     <div id="q-app">
@@ -82,7 +75,14 @@
 	</q-layout>
     </div>
     
-
+<script src="https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.0/dist/umd/quasar.mat.umd.min.js"></script>
+   <!--
+    <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.0/dist/umd/i18n.pt_br.umd.min.js"></script>
+  -->
+    <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.0/dist/umd/icons.fontawesome.umd.min.js"></script>
+    <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/http-vue-loader"></script>
     
     
 
@@ -90,9 +90,9 @@
       Quasar.i18n.set(Quasar.i18n.pt_br)
       Quasar.icons.set(Quasar.icons.fontawesome)
       
-      	httpVueLoader.register(Vue, 'js/components/component-input.vue');
-    	httpVueLoader.register(Vue, 'js/components/component-photo.vue');
-    	httpVueLoader.register(Vue, 'js/components/component-colaborador.vue');
+      	
+    	httpVueLoader.register(Vue, '/js/components/colaborador-list.vue');
+    	httpVueLoader.register(Vue, '/js/components/colaborador-create.vue');
  
 
    		var app = new Vue({
@@ -113,12 +113,13 @@
         mounted() {
             //productService.findAll(r => {this.tableData = r.data})
           },
-          components: [
-              'component-input', 'component-photo', 'component-colaborador'
-            ]
+        components: [ 
+            'colaborador-list',
+            'colaborador-create'
+        ]
       })
        
     </script>
-    <script src="js/app.js"></script>
+    <script src="/js/app.js"></script>
   </body>
 </html>

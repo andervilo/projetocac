@@ -1,4 +1,4 @@
-package br.ord.cac.controllers;
+package br.ord.cac.controllers.rest;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
