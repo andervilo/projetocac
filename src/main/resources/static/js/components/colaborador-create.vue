@@ -33,6 +33,9 @@
                 <div class="col-sm-4 col-md-4 col-xs-12 q-px-md">
                     <q-input  v-model="colaborador.profissao" float-label="Profissão"   />
                 </div>
+                <div class="col-12 q-px-md">
+                    <q-input  v-model="colaborador.comoColaborar" float-label="Como colabora?"   />
+                </div>
             </div> 
         </q-page>	
     </q-page-container>
@@ -54,7 +57,8 @@
               celular:"",
               email:"",
               profissao:"",
-              cpfOuCnpj:""
+              cpfOuCnpj:"",
+              comoColaborar:"",
             }
 
       }

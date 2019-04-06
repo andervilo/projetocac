@@ -45,11 +45,14 @@
           <q-list no-border link inset-delimiter>
             <q-list-header class="text-white">Essential Links</q-list-header>
 
-            
+            <q-item @click.native="launch('/dashboard')">
+              <q-item-side color="white" icon="fas fa-tachometer-alt"></q-item-side>
+              <q-item-main class="text-white" label="Dashboard" ></q-item-main>
+            </q-item>
             
 
             <q-item @click.native="launch('/acoes')">
-              <q-item-side color="white" icon="fas fa-tty"></q-item-side>
+              <q-item-side color="white" icon="fa fa-tty"></q-item-side>
               <q-item-main class="text-white" label="Ações" ></q-item-main>
             </q-item>
             
@@ -95,6 +98,7 @@
       	
     	httpVueLoader.register(Vue, '/js/components/colaborador-list.vue');
     	httpVueLoader.register(Vue, '/js/components/colaborador-create.vue');
+    	httpVueLoader.register(Vue, '/js/components/dash-board.vue');
  
 
    		var app = new Vue({
@@ -118,7 +122,8 @@
           },
         components: [ 
             'colaborador-list',
-            'colaborador-create'
+            'colaborador-create',
+            'dash-board'
         ]
       })
        

@@ -11,9 +11,21 @@ import springfox.documentation.annotations.ApiIgnore;
 public class IndexController  {
 	
 	@GetMapping("")
-	public String index() {
+	public String index1() {
 		
-		return "datatables";
+		return "base/dashboard";
+	}
+	
+	@GetMapping("/dashboard")
+	public String index2() {
+		
+		return "base/dashboard";
+	}
+	
+	@GetMapping("/")
+	public String index3() {
+		
+		return "base/dashboard";
 	}
 	
 	@GetMapping("/acoes")
