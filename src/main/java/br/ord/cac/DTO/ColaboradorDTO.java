@@ -1,10 +1,9 @@
 package br.ord.cac.DTO;
 
-import javax.persistence.Column;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
 import br.ord.cac.arquitetura.IDTO;
@@ -24,19 +23,17 @@ public class ColaboradorDTO implements IDTO {
 
 	private String celular;
 
+	@Pattern(regexp="^[0-9]{5}\\-[0-9]{3}$", message="Formato do CEP informado é inválido!")
 	private String cep;
 	
     private String comoColaborar;
 
 	private String complemento;
 	
-	@CPF(message="O CPF informado é inválido DTO!")
-	@Length(max = 18, message="Tamanho deve estar entre 0 e 18")
-    @Column(name = "cpfOuCnpj")
+	@CPF(message="O CPF informado é inválido!")
     private String cpfOuCnpj;
     
-	@NotEmpty(message="Campo E-mail não pode estar em branco DTO!")
-	@Email(message="E-mail informado é inválido DTO!")
+	@Email(message="E-mail informado é inválido!")
 	private String email;
 
 	private String logradouro;

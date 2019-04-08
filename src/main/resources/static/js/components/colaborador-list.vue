@@ -26,7 +26,7 @@
                             </td> 
                             <td> 
                                 <a href="/colaboradores/novo">
-                                    <q-btn icon="create" color="secondary" class="col-12" style="text-align:center" label="novo"/> 
+                                    <q-btn icon="fas fa-plus" color="primary" class="col-12" style="text-align:center" label="novo"/> 
                                 </a>
                             </td> 
                         </tr> 

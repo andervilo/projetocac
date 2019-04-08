@@ -1,7 +1,34 @@
 <template>	
     <q-page-container >
         <q-page padding>
-                <div class="q-headline text-weight-light">Novo Colaborador</div>
+
+            <transition
+            enter-active-class="animated bounceInLeft"
+            leave-active-class="animated bounceOutRight"
+            appear
+            >
+                <q-alert
+                    v-if="resposta.exibir && !resposta.sucesso"
+                    type="negative"
+                    appear
+                    class="q-mb-sm"
+                >
+                    <p v-for="erro in resposta.erros">{{ erro }}</p>
+                </q-alert>
+
+                <q-alert
+                    v-if="resposta.exibir && resposta.sucesso"
+                    type="positive"
+                    appear
+                    class="q-mb-sm"
+                >
+                    {{ resposta.mensagem }}
+                </q-alert>
+            </transition>
+            <div class="row q-px-md">
+                <div class="q-headline text-weight-light col-9 col-sm-8 col-xs-8">Novo Colaborador</div>
+                
+            </div>
             <div class="row">	            
                 <div class="col-sm-8 col-md-8 col-xs-12 q-px-md">
                     <q-input  v-model="colaborador.nome" float-label="Nome"   />
@@ -36,7 +63,29 @@
                 <div class="col-12 q-px-md">
                     <q-input  v-model="colaborador.comoColaborar" float-label="Como colabora?"   />
                 </div>
-            </div> 
+            </div> <br>
+            <div class="row q-px-md">
+                <div class="col-md-2 col-sm-6 col-xs-6">
+                    <a href="/colaboradores">
+                        <q-btn
+                            color="negative"
+                            icon="fas fa-arrow-left"
+                            label="Voltar"
+                            class=""
+                        />
+                    </a>
+                </div>
+                <div class="col-md-2 col-sm-6 col-xs-6">
+                        <q-btn
+                            color="secondary"
+                            icon="fas fa-save"
+                            label="Salvar"
+                            class=""
+                            @click="create()"
+                        />
+                </div>
+            </div>
+            <!-- {{ colaborador }} -->
         </q-page>	
     </q-page-container>
 
@@ -47,7 +96,7 @@
       
     data() {
       return {
-          colaborador:{
+        colaborador:{
               nome:"",
               logradouro:"",
               numero:"",
@@ -59,7 +108,14 @@
               profissao:"",
               cpfOuCnpj:"",
               comoColaborar:"",
-            }
+        },
+        resposta:{
+            exibir:false,
+            sucesso:false,
+            mensagem:"",
+            erros:[]
+        }
+
 
       }
     }, 
@@ -70,6 +126,32 @@
             .get('/api/v1/colaboradores')
             .then(response => {this.tableData = response.data})
             .catch(error => console.log(error))
+        },
+        create() {
+            this.resposta.exibir = false
+            if(this.colaborador.cpfOuCnpj == ""){
+                this.colaborador.cpfOuCnpj = null
+            }
+            console.log(this.colaborador)
+
+            axios
+                .post('/api/v1/colaboradores', this.colaborador)
+                .then(response => {
+                    this.resposta.sucesso = response.data.success
+                    this.resposta.mensagem = response.data.message
+                    this.resposta.exibir = true
+                    console.log(response.data)
+                })
+                .catch(error => {
+                    if(error.response.data.errors){
+                        this.resposta.sucesso = false
+                        this.resposta.erros = error.response.data.errors
+                        this.resposta.exibir = true
+                        console.log(this.resposta)
+                    }
+
+                    console.log(error.response.data)
+                })
         }      
     },
 
