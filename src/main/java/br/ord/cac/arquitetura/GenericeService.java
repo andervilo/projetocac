@@ -69,7 +69,7 @@ public class GenericeService<E, R extends JpaRepository<E, Integer>, D extends I
 	@SuppressWarnings("unchecked")
 	@Override
 	public D create(D object) {
-		E entityForSave = (E) UtilsDTO.dtoToEntity(object, getEntityClass());		
+		E entityForSave = (E) UtilsDTO.dtoToEntity(object, getEntityClass());
 		E entitySaved = repository.saveAndFlush((E)entityForSave);
 		return (D) UtilsDTO.entityToDTO(entitySaved, getDtoClass());
 	}

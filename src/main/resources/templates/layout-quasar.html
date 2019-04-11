@@ -19,14 +19,7 @@
     <style type="text/css">
      
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.0/dist/umd/quasar.mat.umd.min.js"></script>
-   <!--
-    <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.0/dist/umd/i18n.pt_br.umd.min.js"></script>
-  -->
-    <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.0/dist/umd/icons.fontawesome.umd.min.js"></script>
-    <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/http-vue-loader"></script>
+    
   </head>
   <body>
     <div id="q-app">
@@ -50,29 +43,34 @@
           :width="250"
         >
           <q-list no-border link inset-delimiter>
-            <q-list-header class="text-white">Essential Links</q-list-header>
+            <q-list-header class="text-white">MENU</q-list-header>
 
-            
-            <q-item href="#">
-              <q-item-side color="white" icon="fas fa-graduation-cap"></q-item-side>
-              <q-item-main class="text-white" label="Docs" ></q-item-main>
+            <q-item @click.native="launch('/dashboard')">
+              <q-item-side color="white" icon="fas fa-tachometer-alt"></q-item-side>
+              <q-item-main class="text-white" label="Dashboard" ></q-item-main>
             </q-item>
             
+
+            <q-item @click.native="launch('/acoes')">
+              <q-item-side color="white" icon="fa fa-tty"></q-item-side>
+              <q-item-main class="text-white" label="Ações" ></q-item-main>
+            </q-item>
             
-            <q-item class="text-white">
-              <q-item-side color="white" icon="fas fa-comments"></q-item-side>
-              <q-item-main  >
-                <a style="text-decoration: none;" href="#" class="text-white">Discord Chat Channel</a>
-              </q-item-main>
+            <q-item @click.native="launch('/campanhas')">
+              <q-item-side color="white" icon="fas fa-tasks"></q-item-side>
+              <q-item-main class="text-white" label="Campanhas" ></q-item-main>
             </q-item>
-            <q-item class="text-white" @click.native="launch('http://forum.quasar-framework.org')">
-              <q-item-side color="white" icon="far fa-clipboard"></q-item-side>
-              <q-item-main label="Forum" ></q-item-main>
+
+            <q-item @click.native="launch('/colaboradores')">
+              <q-item-side color="white" icon="fas fa-id-card"></q-item-side>
+              <q-item-main class="text-white" label="Colaboradores" ></q-item-main>
             </q-item>
-            <q-item class="text-white" @click.native="launch('https://twitter.com/quasarframework')">
-              <q-item-side color="white" icon="fab fa-twitter"></q-item-side>
-              <q-item-main label="Twitter" ></q-item-main>
+
+            <q-item @click.native="launch('/doacoes')">
+              <q-item-side color="white" icon="fas fa-handshake  "></q-item-side>
+              <q-item-main class="text-white" label="Doações" ></q-item-main>
             </q-item>
+            
           </q-list>
         </q-layout-drawer>
 	
@@ -82,7 +80,14 @@
 	</q-layout>
     </div>
     
-
+<script src="https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.0/dist/umd/quasar.mat.umd.min.js"></script>
+   <!--
+    <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.0/dist/umd/i18n.pt_br.umd.min.js"></script>
+  -->
+    <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.0/dist/umd/icons.fontawesome.umd.min.js"></script>
+    <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/http-vue-loader"></script>
     
     
 
@@ -90,9 +95,10 @@
       Quasar.i18n.set(Quasar.i18n.pt_br)
       Quasar.icons.set(Quasar.icons.fontawesome)
       
-      	httpVueLoader.register(Vue, 'js/components/component-input.vue');
-    	httpVueLoader.register(Vue, 'js/components/component-photo.vue');
-    	httpVueLoader.register(Vue, 'js/components/component-colaborador.vue');
+      	
+    	httpVueLoader.register(Vue, '/js/components/colaborador-list.vue');
+    	httpVueLoader.register(Vue, '/js/components/colaborador-create.vue');
+    	httpVueLoader.register(Vue, '/js/components/dash-board.vue');
  
 
    		var app = new Vue({
@@ -107,18 +113,21 @@
         },
         methods: {
           launch: function (url) {
-            Quasar.utils.openURL(url)
+            //Quasar.utils.openURL(url)
+            window.location.href = url;
           }
         },
         mounted() {
             //productService.findAll(r => {this.tableData = r.data})
           },
-          components: [
-              'component-input', 'component-photo', 'component-colaborador'
-            ]
+        components: [ 
+            'colaborador-list',
+            'colaborador-create',
+            'dash-board'
+        ]
       })
        
     </script>
-    <script src="js/app.js"></script>
+    <script src="/js/app.js"></script>
   </body>
 </html>

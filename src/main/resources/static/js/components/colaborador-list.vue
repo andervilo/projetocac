@@ -25,14 +25,12 @@
                                 color="secondary" v-model="filter" /> 
                             </td> 
                             <td> 
-                                <q-btn icon="create" color="secondary" class="col-12" style="text-align:conter" >Novo</q-btn> 
-                            </td> 
-                            <td> 
-                                <q-btn icon="create" color="secondary" class="col-12" style="text-align:conter" label="novo"/> 
+                                <a href="/colaboradores/novo">
+                                    <q-btn icon="fas fa-plus" color="primary" class="col-12" style="text-align:center" label="novo"/> 
+                                </a>
                             </td> 
                         </tr> 
                     </table> 
-                    
                     
                 </template>		 
             </q-table> 
