@@ -1,12 +1,5 @@
 package br.ord.cac.DTO;
 
-import javax.persistence.Column;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.br.CPF;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.ord.cac.arquitetura.IDTO;
