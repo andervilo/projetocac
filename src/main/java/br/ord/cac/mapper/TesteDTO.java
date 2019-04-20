@@ -1,8 +1,5 @@
 package br.ord.cac.mapper;
 
-import java.util.Arrays;
-
-import br.ord.cac.arquitetura.UtilsDTO;
 import br.ord.cac.enums.PermisionEnum;
 
 public class TesteDTO {
