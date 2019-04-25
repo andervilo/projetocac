@@ -14,6 +14,8 @@ public class GenericeService<E, R extends JpaRepository<E, Integer>, D extends I
 	
 	@Autowired
 	private R repository;	
+	
+	
 
 	@Override
 	public List<?> findAll() {
@@ -103,6 +105,11 @@ public class GenericeService<E, R extends JpaRepository<E, Integer>, D extends I
 		
 		repository.delete(repository.findById(id).get());
 		return true;
+	}
+
+	@Override
+	public JpaRepository<E, Integer> getRepository() {
+		return this.repository;
 	}
 
 	

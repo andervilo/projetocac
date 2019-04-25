@@ -26,7 +26,7 @@ public class ColaboradorDTO implements IDTO {
 
 	private String celular;
 
-	@Pattern(regexp="^[0-9]{5}\\-[0-9]{3}$", message="Formato do CEP informado é inválido!")
+	//@Pattern(regexp="^[0-9]{5}\\-[0-9]{3}$", message="Formato do CEP informado é inválido!")
 	private String cep;
 	
     private String comoColaborar;
@@ -220,4 +220,14 @@ public class ColaboradorDTO implements IDTO {
 		this.profissao = profissao;
 	}
 
+
+	@Override
+	public String toString() {
+		return "ColaboradorDTO [id=" + id + ", nome=" + nome + ", bairro=" + bairro + ", celular=" + celular + ", cep="
+				+ cep + ", comoColaborar=" + comoColaborar + ", complemento=" + complemento + ", cpfOuCnpj=" + cpfOuCnpj
+				+ ", email=" + email + ", logradouro=" + logradouro + ", numero=" + numero + ", perfil=" + perfil
+				+ ", profissao=" + profissao + "]";
+	}
+
+	
 }

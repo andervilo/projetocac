@@ -1,7 +1,7 @@
 <template>	
     <q-page-container >
         <q-page padding>
-
+            <span th:text="${teste}">Teste</span>
             <transition
             enter-active-class="animated bounceInLeft"
             leave-active-class="animated bounceOutRight"
@@ -26,7 +26,7 @@
                 </q-alert>
             </transition>
             <div class="row q-px-md">
-                <div class="q-headline text-weight-light col-9 col-sm-8 col-xs-8">Novo Colaborador</div>
+                <div class="q-headline text-weight-light col-9 col-sm-8 col-xs-8">Novo Colaborador </div>
                 
             </div>
             <div class="row">	            

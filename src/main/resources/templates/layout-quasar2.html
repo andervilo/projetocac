@@ -73,36 +73,36 @@
             
           </q-list>
         </q-layout-drawer>
-        <q-layout layout:fragment="content">
-            
-            
-        </q-layout>
-    </div>	
-	
+</div>	
+	<!-- <q-layout layout:fragment="content">
+		
+		
+	</q-layout> -->
+	<div layout:fragment="content">
+		
+		
+	</div>
     
     
-    <script th:src="@{/js/assets/vue.min.js}"></script>
-    <script th:src="@{/js/assets/quasar.mat.umd.min.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.0/dist/umd/quasar.mat.umd.min.js"></script>
    <!--
     <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.0/dist/umd/i18n.pt_br.umd.min.js"></script>
   -->
-    <script th:src="@{/js/assets/icons.fontawesome.umd.min.js}"></script>
-    <script th:src="@{/js/assets/axios.min.js}"></script>
-    <script th:src="@{/js/assets/http-vue-loader.js}"></script>
-    <script th:src="@{/js/waves.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.0/dist/umd/icons.fontawesome.umd.min.js"></script>
+    <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/http-vue-loader"></script>
     
     
 
     <script>
       Quasar.i18n.set(Quasar.i18n.pt_br)
       Quasar.icons.set(Quasar.icons.fontawesome)
-
       
       	
     	httpVueLoader.register(Vue, '/js/components/colaborador-list.vue');
     	httpVueLoader.register(Vue, '/js/components/colaborador-create.vue');
     	httpVueLoader.register(Vue, '/js/components/dash-board.vue');
-    	httpVueLoader.register(Vue, '/js/components/table-data.vue');
  
 
    		var app = new Vue({
@@ -116,21 +116,18 @@
           }
         },
         methods: {
-            launch: function (url) {
-                //Quasar.utils.openURL(url)
-                window.location.href = url;
-            }
+          launch: function (url) {
+            //Quasar.utils.openURL(url)
+            window.location.href = url;
+          }
         },
         mounted() {
             //productService.findAll(r => {this.tableData = r.data})
-        },
-        created() {
-        },
+          },
         components: [ 
             'colaborador-list',
             'colaborador-create',
-            'dash-board',
-            'table-data'
+            'dash-board'
         ]
       })
        

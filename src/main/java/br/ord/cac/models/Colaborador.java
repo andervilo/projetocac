@@ -42,7 +42,7 @@ public class Colaborador implements Serializable {
 
 	private String celular;
 
-	@Pattern(regexp="^[0-9]{5}\\-[0-9]{3}$", message="Formato do CEP informado é inválido!")
+	//@Pattern(regexp="^[0-9]{5}\\-[0-9]{3}$", message="Formato do CEP informado é inválido!")
 	private String cep;
 	
 	@Size(max = 250)
@@ -51,7 +51,7 @@ public class Colaborador implements Serializable {
 
 	private String complemento;
 	
-	@CPF(message="O CPF informado é inválido!")
+	//@CPF(message="O CPF informado é inválido!")
 	@Size(max = 18)
     @Column(name = "cpfOuCnpj")
     private String cpfOuCnpj;
