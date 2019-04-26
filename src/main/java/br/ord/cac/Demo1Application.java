@@ -2,6 +2,7 @@ package br.ord.cac;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.cmeza.sdgenerator.annotation.SDGenerator;
 
@@ -15,6 +16,7 @@ overwrite = false
 )
 
 @SpringBootApplication
+@EnableScheduling
 public class Demo1Application {
 
 	public static void main(String[] args) {

@@ -6,6 +6,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import br.ord.cac.services.ServiceColaborador;
 import springfox.documentation.annotations.ApiIgnore;
@@ -18,6 +19,16 @@ public class IndexController  {
 	@Autowired
 	private ServiceColaborador serviceColaborador;
 	
+	private String teste;	
+	
+	public String getTeste() {
+		return teste;
+	}
+
+	public void setTeste(String teste) {
+		this.teste = teste;
+	}
+
 	@GetMapping("")
 	public String index1() {
 		
@@ -72,5 +83,29 @@ public class IndexController  {
 		model.addAttribute("colaboradores", serviceColaborador.findAll(pageable));
 		return "colaboradores/teste";
 	}
+	
+	@GetMapping("/minharota")
+	public String minharota(Model model) {
+		return "teste";
+	}
+	
+	@GetMapping("/ajax")
+    public String loadContent() {
+        return "ajax/website";
+    }
+
+	@PostMapping("/ajax/content1")
+    public String getContent1(Model model) {
+		setTeste("Conteúdo 1");
+		model.addAttribute("attr1", getTeste());
+        return "ajax/content :: content1";
+    }
+
+	@PostMapping("/ajax/content2")
+    public String getContent2(Model model) {
+		setTeste("Conteúdo 2");
+		model.addAttribute("attr2", getTeste());
+        return "ajax/content :: content2";
+    }
 	
 }
