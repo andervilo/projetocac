@@ -21,10 +21,10 @@ public class FakerBuildColab {
 	@PostConstruct
 	public void makeColaboradores() {
 //		Faker faker = new Faker(new Locale("pt-BR"));
-//		for(int i = 0; i <= 100; i++ ) {
+//		for(int i = 0; i <= 10000; i++ ) {
 //			
 //			ColaboradorDTO colab = new ColaboradorDTO(
-//					faker.leagueOfLegends().champion(), 
+//					faker.name().firstName()+" "+faker.name().lastName(), 
 //					faker.lorem().sentence(3), 
 //					faker.phoneNumber().cellPhone(), 
 //					faker.address().zipCode(), 
