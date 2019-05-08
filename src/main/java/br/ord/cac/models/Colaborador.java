@@ -139,7 +139,9 @@ public class Colaborador implements Serializable {
 	}
 
 	public String getCpfOuCnpj() {
-		return this.cpfOuCnpj;
+//		cpf = cpf.replaceAll("(\\d{2})(\\d{3})(\\d{3})(\\d{4})(\\d{2})", "$1.$2.$3-$4")
+		cpfOuCnpj = cpfOuCnpj.substring(0, 3)+"."+cpfOuCnpj.substring(3,6)+"."+cpfOuCnpj.substring(6,9)+"-"+cpfOuCnpj.substring(9,11);
+		return cpfOuCnpj;
 	}
 
 	public void setCpfOuCnpj(String cpfOuCnpj) {

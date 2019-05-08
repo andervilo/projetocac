@@ -16,6 +16,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -182,12 +183,23 @@ public class ColaboradorController {
 		setColabList(colabPage.getContent());
 	}
 	
-	public void delete() {
-		repository.delete(getVO());
-		setVO(new Colaborador());
-		Pageable pageable = PageRequest.of(colabPage.getNumber(), colabPage.getSize(), new Sort(Direction.DESC, "id"));
-		colabPage = repository.findAll(pageable);		
-		setColabList(colabPage.getContent());
+	@PostMapping("/delete")
+	public String delete(@RequestParam("id") int id) {
+		if(repository.findById(id).isPresent()) {
+			repository.deleteById(id);
+			initListColaborador();			
+		}
+		return "redirect:/colaboradores";
+	}
+	
+	@GetMapping("/{id}/show")
+	public String show(@PathVariable int id, Model model) {
+		if(repository.findById(id).isPresent()) {
+			model.addAttribute("colaborador", repository.findById(id).get());				
+			return "colaboradores/show";
+		}
+		initListColaborador();
+		return "redirect:/colaboradores";
 	}
 	
 	public void editar(Colaborador colaborador) {

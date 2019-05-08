@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="pt-br"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/material-layout}">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
+
+    <title>Show Colaborador: [[${colaborador.nome}]]</title>
+
+  </head>
+    <body>
+	    <section layout:fragment="pagetitle" >
+	    	<div class="row page-titles" style="padding: 0; margin-bottom: 15px;">
+				<div class="col-md-5 col-8 align-self-center">
+					<h3 class="text-themecolor">Colaborador: <spam th:text="${colaborador.nome}"></spam></h3>
+<!-- 					<ol class="breadcrumb"> -->
+<!-- 						<li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li> -->
+<!-- 						<li class="breadcrumb-item active">Colaboradores</li> -->
+<!-- 					</ol> -->
+				</div>
+			</div>
+	    </section>
+        <section layout:fragment="content" >	
+        	<div class="col-md-10">	
+				<div class="card" >
+		        	<div class="card-block">
+		        		<div class="row">
+        					<table class="table table-sm">
+        						<tbody>
+        							<tr>
+        								<td><strong>#Código:</strong></td><td>[[${colaborador.id}]]</td>        								
+       								</tr>
+       								<tr>
+       									<td><strong>Nome:</strong></td><td>[[${colaborador.nome}]]</td>
+       								</tr>
+       								<tr>
+        								<td><strong>E-mail:</strong></td><td>[[${colaborador.email}]]</td>
+        							</tr>
+       								<tr>
+        								<td><strong>Celular:</strong></td><td>[[${colaborador.celular}]]</td>
+        							</tr>
+       								<tr>
+        								<td><strong>CPF/CNPJ:</strong></td><td>[[${colaborador.cpfOuCnpj}]]</td>
+        							</tr>
+       								<tr>
+        								<td><strong>Endereço:</strong></td>
+        								<td>
+        									<table class="table-striped">
+        										<tbody>
+        											<tr>
+				        								<td><strong>Logradouro:</strong></td><td>[[${colaborador.logradouro}]]</td>
+				        							</tr>
+        											<tr>
+				        								<td><strong>Número:</strong></td><td>[[${colaborador.numero}]]</td>
+				        							</tr>
+        											<tr>
+				        								<td><strong>Complemento:</strong></td><td>[[${colaborador.complemento}]]</td>
+				        							</tr>
+        											<tr>
+				        								<td><strong>Bairro:</strong></td><td>[[${colaborador.bairro}]]</td>
+				        							</tr>
+        											<tr>
+				        								<td><strong>CEP:</strong></td><td>[[${colaborador.cep}]]</td>
+				        							</tr>
+        										</tbody>
+        									</table>
+        								</td>
+        							</tr>
+        						</tbody>
+        					</table>
+		        		</div>
+		        	</div>
+	        	</div>
+        	</div>
+        </section>
+    </body>
+</html>

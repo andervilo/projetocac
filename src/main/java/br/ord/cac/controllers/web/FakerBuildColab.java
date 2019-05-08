@@ -12,7 +12,7 @@ import com.github.javafaker.Faker;
 import br.ord.cac.DTO.ColaboradorDTO;
 import br.ord.cac.services.ServiceColaborador;
 
-@Configuration
+//@Configuration
 public class FakerBuildColab {
 	
 	@Autowired
@@ -20,25 +20,25 @@ public class FakerBuildColab {
 	
 	@PostConstruct
 	public void makeColaboradores() {
-//		Faker faker = new Faker(new Locale("pt-BR"));
-//		for(int i = 0; i <= 10000; i++ ) {
-//			
-//			ColaboradorDTO colab = new ColaboradorDTO(
-//					faker.name().firstName()+" "+faker.name().lastName(), 
-//					faker.lorem().sentence(3), 
-//					faker.phoneNumber().cellPhone(), 
-//					faker.address().zipCode(), 
-//					faker.lorem().sentence(3), 
-//					faker.lorem().sentence(4), 
-//					faker.number().digits(11), 
-//					faker.internet().emailAddress(), 
-//					faker.address().streetAddress(), 
-//					faker.address().streetAddressNumber(), 
-//					faker.artist().name(), 
-//					faker.job().title());
-//			
-//			service.create(colab);
-//		}
+		Faker faker = new Faker(new Locale("pt-BR"));
+		for(int i = 0; i <= 500; i++ ) {
+			
+			ColaboradorDTO colab = new ColaboradorDTO(
+					faker.name().firstName()+" "+faker.name().lastName(), 
+					faker.address().firstName(), 
+					"("+faker.number().digits(2)+") 9"+faker.number().digits(4)+"-"+faker.number().digits(4), 
+					faker.number().digits(5)+"-"+faker.number().digits(3), 
+					faker.lorem().sentence(3), 
+					faker.address().streetName()+", "+faker.address().streetName(), 
+					faker.number().digits(11), 
+					faker.internet().emailAddress(), 
+					faker.address().streetAddress(), 
+					faker.address().streetAddressNumber(), 
+					faker.artist().name(), 
+					faker.job().title());
+			
+			service.create(colab);
+		}
 		
 		//System.out.println(colab.toString()); 
 	}
