@@ -1,14 +1,12 @@
 package br.ord.cac.mapper;
 
-import br.ord.cac.enums.PermisionEnum;
-
 public class TesteDTO {
 	
 
 	public static void main(String[] args) {
 		
 //		for (PermisionEnum p : Arrays.asList(PermisionEnum.values())) {
-			System.out.println(PermisionEnum.getById(9));
+//			System.out.println(PermisionEnum.getById(9));
 //		}
 		
 		

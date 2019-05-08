@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org" lang="pt-br"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout-quasar}">
+	layout:decorate="~{layout/material-layout}">
 
 <head>
     <meta charset="utf-8">
@@ -15,8 +15,100 @@
 
   </head>
     <body>
-        <section layout:fragment="content">
-            <colaborador-list></colaborador-list>
+	    <section layout:fragment="pagetitle" >
+	    	<div class="row page-titles" style="padding: 0; margin-bottom: 15px;">
+				<div class="col-md-5 col-8 align-self-center">
+					<h3 class="text-themecolor">Colaboradores</h3>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+						<li class="breadcrumb-item active">Colaboradores</li>
+					</ol>
+				</div>
+			</div>
+	    </section>
+        <section layout:fragment="content" >	
+        	<div class="col-md-10">	
+				<div class="card" >
+		        	<div class="card-block">
+		        		<div class="row">
+			        				<div class="col-md-10">
+				        				<form action="/colaboradores/buscarpor" method="POST" class="form-horizontal form-material row">
+		                                    <div class="form-group col-md-4">
+			                                    <select th:value="${size}" name="size" title="Número de registros por página!" class="form-control form-control-line">
+			                                        <option 
+				                                        th:each="item : ${porPagina}" 
+				                                        th:value="${item.getValor()}" 
+				                                        th:text="${item.getDescricao()}"
+				                                        th:selected="${item.getValor()==size}">
+			                                        </option>
+			                                    </select>
+				                            </div>
+		                                    <div class="form-group col-md-7">
+		                                        <div>
+		                                            <input title="Você pode fazer buscas por Nome, Celular ou E-mail para encontrar um Colaborador!" type="text" th:value="${busca}" name="busca" placeholder="Nome, Celular ou E-mail" class="form-control form-control-line">
+		                                        </div>
+		                                    </div>    
+		                                    <div class="form-group col-md-1">
+		                                        <div>
+		                                            <button title="Aplicar Filtro" class="btn btn-success"><i class="fas fa-filter"></i></button>
+		                                        </div>
+		                                    </div>
+		                                </form>
+	                                </div>
+	                                <div class="col-md-2">
+		                                <form  action="/colaboradores/resetabusca" method="POST" class="form-horizontal form-material">
+		                                	<div>
+		                                    	<button title="Limpar Filtro" class="btn btn-danger"><i class="fas fa-eraser"></i></button>
+		                                   	</div>
+		                                </form>
+	                                </div>
+		        		</div>
+		        		<div class="table-responsive">
+				        	<table class="table table-sm">
+				        		<thead>
+			        			<tr>
+			        				<th>Nome</th>
+			        				<th>Celular</th>
+			        				<th>E-mail</th>
+			        				<th></th>
+			        			</tr>
+			        		</thead>
+			        		<tbody>
+			        			<tr th:each="colaborador : ${colaboradores}">
+			        				<td th:text="${colaborador.nome}"></td>
+			        				<td th:text="${colaborador.celular}"></td>
+			        				<td th:text="${colaborador.email}"></td>
+			        				<td>
+			        					<button class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></button>
+			        					<button class="btn btn-success  btn-sm"><i class="fas fa-eye"></i></button>
+			        					<button class="btn btn-danger  btn-sm"><i class="fas fa-trash"></i></button>
+			        					<button class="btn btn-primary  btn-sm"><i class="fas fa-calendar-week"></i></button>
+			        					<button class="btn btn-info btn-sm"><i class="fas fa-tasks"></i></button>
+			        					<button class="btn btn-info btn-sm" style="background: #66bb6a; border: 1px solid #66bb6a;"><i class="fas fa-money-bill-alt"></i></button>
+			        				</td>
+			        			</tr>
+			        		
+			        		</tbody>
+			        	</table>
+		        		</div>
+		        		<div class="row">
+		        			<div class="col-md-2 col-sm-4 col-4">
+			        			<form action="/colaboradores/anterior" method="POST">
+			        				<button th:disabled="${!page.hasPrevious()}" class="btn btn-light"><i class="fas fa-arrow-circle-left"></i> Anterior</button>
+			        			</form>
+		        			</div>
+		        			<div class="col-md-2 col-sm-4 col-4 text-center align-self-center">
+			        			<spam th:text="${page.getNumber()+1} +' / '+ ${page.getTotalPages()}" ></spam>
+		        			</div>
+		        			<div class="col-md-2 col-sm-4 col-4">
+			        			<form action="/colaboradores/proximo" method="POST">
+			        				<button th:disabled="${!page.hasNext()}" class="btn btn-light">Próximo <i class="fas fa-arrow-circle-right"></i></button>
+			        			</form>
+		        			</div>
+		        		</div>
+		        	</div>
+	        	</div>
+        	</div>
         </section>
     </body>
 </html>
