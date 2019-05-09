@@ -1,6 +1,6 @@
 package br.ord.cac.enums;
 
-import br.com.jsfspringboot.enums.interfaces.IEnumModel;
+import br.ord.cac.enums.interfaces.IEnumModel;
 
 public enum MeseEnum implements IEnumModel<Integer> {
 	JANEIRO(1,"Janeiro"),

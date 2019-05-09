@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +16,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -174,15 +177,6 @@ public class ColaboradorController {
 		return "colaboradores/list";
 	}
 	
-	
-	public void save() {
-		repository.saveAndFlush(getVO());
-		setVO(new Colaborador());
-		Pageable pageable = PageRequest.of(colabPage.getNumber(), colabPage.getSize(), new Sort(Direction.DESC, "id"));
-		colabPage = repository.findAll(pageable);		
-		setColabList(colabPage.getContent());
-	}
-	
 	@PostMapping("/delete")
 	public String delete(@RequestParam("id") int id) {
 		if(repository.findById(id).isPresent()) {
@@ -200,16 +194,51 @@ public class ColaboradorController {
 		}
 		initListColaborador();
 		return "redirect:/colaboradores";
+	}//@ModelAttribute @Valid Privilegio privilegio
+	
+	@GetMapping("/{id}/editar")
+	public String editar(@PathVariable int id, Model model) {
+		if(repository.findById(id).isPresent()) {
+			model.addAttribute("colaborador", repository.findById(id).get());				
+			return "colaboradores/edit";
+		}
+		initListColaborador();
+		return "redirect:/colaboradores";
 	}
 	
-	public void editar(Colaborador colaborador) {
-		//System.out.println(getVO().getNome());
-		//repository.delete(getVO());
-		setVO(colaborador);
-		//return null;
+	@PostMapping("/{id}/salvar")
+	public String salvar(@PathVariable int id, Model model, @ModelAttribute @Valid Colaborador colaborador) {
+		if(repository.findById(id).isPresent()) {
+			try {
+				repository.saveAndFlush(colaborador);
+			} catch (Exception e) {
+				System.out.println("Erro ao alterar Colaborador: "+e.getMessage());
+			}				
+			return "redirect:/colaboradores/"+id+"/show";
+		}
+		initListColaborador();
+		return "redirect:/colaboradores/";
 	}
 	
-	public void limpar() {
-		setVO(null);
+	@PostMapping("/salvar")
+	public String salvarAlteracao(@ModelAttribute @Valid Colaborador colaborador, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+            return "colaboradores/create";
+        }else {
+			try {
+				repository.saveAndFlush(colaborador);
+			} catch (Exception e) {
+				System.out.println("Erro ao salvar Colaborador: "+e.getMessage());
+			}
+			initListColaborador();
+			return "redirect:/colaboradores/";
+        }
 	}
+	
+	@GetMapping("/novo")
+	public String novo(Model model) {
+		model.addAttribute("colaborador", new Colaborador());		
+		return "colaboradores/create";
+	}
+	
 }

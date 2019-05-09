@@ -2,6 +2,7 @@ package br.ord.cac.models;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,10 +17,9 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.br.CPF;
+import br.ord.cac.enums.TipoPessoaEnum;
 
 
 /**
@@ -36,6 +36,8 @@ public class Colaborador implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
+	@NotNull(message="Campo não pode ser nulo!")
+	@NotEmpty(message="Campo não pode estar em branco!")
 	private String nome;
 
 	private String bairro;
@@ -50,6 +52,11 @@ public class Colaborador implements Serializable {
     private String comoColaborar;
 
 	private String complemento;
+
+	@NotEmpty(message="Campo não pode estar em branco!")
+	@Size(max = 1)
+    @Column(name = "tipoPessoa")
+	private String tipoPessoa;
 	
 	//@CPF(message="O CPF informado é inválido!")
 	@Size(max = 18)
@@ -89,6 +96,17 @@ public class Colaborador implements Serializable {
 
 	public Colaborador() {
 	}
+
+	public TipoPessoaEnum getTipoPessoa() {
+		return TipoPessoaEnum.parse(tipoPessoa);
+	}
+
+	public void setTipoPessoa(Optional<TipoPessoaEnum> tipoPessoa) {
+		this.tipoPessoa = tipoPessoa.isPresent() ? tipoPessoa.get().getValor() : this.tipoPessoa;
+	}
+
+
+
 
 	public int getId() {
 		return this.id;
@@ -139,8 +157,6 @@ public class Colaborador implements Serializable {
 	}
 
 	public String getCpfOuCnpj() {
-//		cpf = cpf.replaceAll("(\\d{2})(\\d{3})(\\d{3})(\\d{4})(\\d{2})", "$1.$2.$3-$4")
-		cpfOuCnpj = cpfOuCnpj.substring(0, 3)+"."+cpfOuCnpj.substring(3,6)+"."+cpfOuCnpj.substring(6,9)+"-"+cpfOuCnpj.substring(9,11);
 		return cpfOuCnpj;
 	}
 

@@ -4,8 +4,8 @@ import br.ord.cac.enums.interfaces.IEnumModel;
 
 
 public enum TipoPessoaEnum implements IEnumModel<String> {
-	FISICA("F", "Física"),
-	JURIDICA("J", "Jurídica");
+	FISICA("F", "Pessoa Física"),
+	JURIDICA("J", "Pessoa Jurídica");
 
 	private String valor;
 
@@ -24,6 +24,16 @@ public enum TipoPessoaEnum implements IEnumModel<String> {
 	@Override
 	public String getValor() {
 		return this.valor;
+	}
+	
+	public static TipoPessoaEnum parse(String tPessoa) {
+		TipoPessoaEnum tp = null;
+		for(TipoPessoaEnum item : TipoPessoaEnum.values()) {
+			if(item.getValor().equals(tPessoa)) {
+				tp = item;
+			}
+		}
+		return tp;
 	}
 
 }

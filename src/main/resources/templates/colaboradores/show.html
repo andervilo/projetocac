@@ -18,11 +18,12 @@
 	    <section layout:fragment="pagetitle" >
 	    	<div class="row page-titles" style="padding: 0; margin-bottom: 15px;">
 				<div class="col-md-5 col-8 align-self-center">
-					<h3 class="text-themecolor">Colaborador: <spam th:text="${colaborador.nome}"></spam></h3>
-<!-- 					<ol class="breadcrumb"> -->
-<!-- 						<li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li> -->
-<!-- 						<li class="breadcrumb-item active">Colaboradores</li> -->
-<!-- 					</ol> -->
+<br>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">DASHBOARD</a></li>
+						<li class="breadcrumb-item ">COLABORADOR</li>
+						<li class="breadcrumb-item active">EXIBIR</li>
+					</ol>
 				</div>
 			</div>
 	    </section>
@@ -31,6 +32,15 @@
 				<div class="card" >
 		        	<div class="card-block">
 		        		<div class="row">
+		        			<div class="col-md-12">
+		        				<a href="/colaboradores/" class="btn btn-sm btn-success"><i class="fas fa-arrow-left"></i> Voltar para listagem</a>
+		        				<a th:href="@{/colaboradores/} + ${colaborador.id} +'/editar'" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Editar</a>
+		        				<a th:href="@{/colaboradores/} + ${colaborador.id} +'/campanhas'" class="btn btn-sm btn-primary"><i class="fas fa-calendar-week"></i> Campanhas</a>
+		        				<a th:href="@{/colaboradores/} + ${colaborador.id} +'/acoes'" class="btn btn-sm btn-info"><i class="fas fa-tasks"></i> Ações</a>
+		        				<a th:href="@{/colaboradores/} + ${colaborador.id} +'/doacoes'" class="btn btn-sm btn-info" style="background: #66bb6a; border: 1px solid #66bb6a;"><i class="fas fa-money-bill-alt"></i> Doações</a>
+		        			</div>
+		        			<br> <br>
+		        			<div class="table-responsive col-md-12">
         					<table class="table table-sm">
         						<tbody>
         							<tr>
@@ -45,8 +55,11 @@
        								<tr>
         								<td><strong>Celular:</strong></td><td>[[${colaborador.celular}]]</td>
         							</tr>
+        							<tr>
+        								<td><strong>Tipo Colaborador:</strong></td><td>[[${colaborador.tipoPessoa.getDescricao()}]]</td>
+        							</tr>
        								<tr>
-        								<td><strong>CPF/CNPJ:</strong></td><td>[[${colaborador.cpfOuCnpj}]]</td>
+        								<td><strong th:text="${colaborador.tipoPessoa.getValor().equals('F')} ? 'CPF:':'CNPJ:'">CPF/CNPJ:</strong></td><td>[[${colaborador.cpfOuCnpj}]]</td>
         							</tr>
        								<tr>
         								<td><strong>Endereço:</strong></td>
@@ -70,6 +83,7 @@
 				        							</tr>
         										</tbody>
         									</table>
+        									</div>
         								</td>
         							</tr>
         						</tbody>
