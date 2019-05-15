@@ -57,7 +57,7 @@
                                         	<option></option>
                                         	<option
                                         			th:each="c : ${colaboradores}" 
-		                                            th:value="${c}" 
+		                                            th:value="${{c}}" 
 		                                            th:text="${c.getNome()}" 
                                         	
                                         	></option>
