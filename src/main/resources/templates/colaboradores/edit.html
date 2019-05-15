@@ -33,7 +33,7 @@
 					<div class="card-block">
 						<div class="row">
 							<div class="col-md-10">
-								<h3 class="card-title">Editar Colaborador(a)</h3>
+								<h3 class="card-title">Editar Colaborador</h3>
 							</div>
 							<div class="col-md-2">							
 								<a style="color: #fff" class="btn btn-danger" onclick="history.back()"><i class="fas fa-save"></i> Cancelar</a>
@@ -61,7 +61,7 @@
                                     	<label>Tipo de Colaborador</label>
                                         <select class="form-control" th:field="*{tipoPessoa}">
                                             <option th:value="''">---Selecione---</option>
-                                            <option th:each="elem: ${T(br.ord.cac.enums.TipoPessoaEnum).values()}" 
+                                            <option th:each="elem: ${T(br.org.cac.enums.TipoPessoaEnum).values()}" 
 		                                            th:value="${elem}" 
 		                                            th:text="${elem.getDescricao()}" 
 		                                            ></option>
