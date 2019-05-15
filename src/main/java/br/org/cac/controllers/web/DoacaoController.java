@@ -1,7 +1,12 @@
 package br.org.cac.controllers.web;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
@@ -24,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.org.cac.enums.PorPaginaEnum;
 import br.org.cac.models.Doacao;
+import br.org.cac.repositories.ColaboradorRepository;
 import br.org.cac.repositories.DoacaoRepository;;
 
 @Controller
@@ -33,17 +39,27 @@ public class DoacaoController {
 	@Autowired
 	private DoacaoRepository repository;
 	
+	@Autowired
+	private ColaboradorRepository colaboradorRepository;
+	
+	
 	private Integer page = 0;
 	private Integer size = 0;
 	private List<Doacao> doacaoList;
 	private Page<Doacao> doacaoPage;
 	private String busca = "";
 	private List<PorPaginaEnum> porPagina;
-	private Date cadastro;
+	private Date cadastro = new Date();
 	
 	@GetMapping
 	public String list(Model model) {
-		
+		System.out.println(getCadastro());
+		model.addAttribute("doacoes", getDoacaoList());
+		model.addAttribute("page", getDoacaoPage());
+		model.addAttribute("busca", getBusca());
+		model.addAttribute("cadastro", getCadastro()!=null ? new SimpleDateFormat("yyyy-MM-dd").format(getCadastro()) : "");
+		model.addAttribute("porPagina", getPorPagina());
+		model.addAttribute("size", getSize());
 		return "doacoes/list";
 	}
 	
@@ -98,8 +114,8 @@ public class DoacaoController {
 	
 	@GetMapping("/novo")
 	public String novo(Model model) {
-		model.addAttribute("doacao", new Doacao());		
-		return "doacao/create";
+		model.addAttribute("colaboradores", colaboradorRepository.findAll());		
+		return "doacoes/create";
 	}
 	
 	@PostMapping("/delete")
@@ -108,7 +124,7 @@ public class DoacaoController {
 			repository.deleteById(id);
 			initList();			
 		}
-		return "redirect:/colaboradores";
+		return "redirect:/doacoes/";
 	}
 	
 	/**
@@ -118,9 +134,61 @@ public class DoacaoController {
 	public void initList(){
 		setSize(5);
 		Pageable pageable = PageRequest.of(page, size, new Sort(Direction.DESC, "id"));
-		this.doacaoPage = repository.findByColaboradorNomeContainingOrCadastro(busca, cadastro, pageable);
+		this.doacaoPage = repository.findByColaboradorNomeContainingOrCadastro(busca, getCadastro(), pageable);
 		setBusca("");
 		setDoacaoList(getDoacaoPage().getContent());
+	}
+	
+	@PostMapping("/proximo")
+	public String proximo() {
+		if(doacaoPage.hasNext()) {
+			doacaoPage = repository.findByColaboradorNomeContainingOrCadastro(busca, getCadastro(), doacaoPage.nextPageable());
+			setDoacaoList(doacaoPage.getContent());
+		}
+		
+		return "redirect:/doacoes/";
+	}
+	
+	@PostMapping("/anterior")
+	public String anterior() {
+		if(doacaoPage.hasPrevious()) {
+			doacaoPage = repository.findByColaboradorNomeContainingOrCadastro(busca, getCadastro(), doacaoPage.previousPageable());
+			setDoacaoList(doacaoPage.getContent());
+		}
+		
+		return "redirect:/doacoes/";
+	}
+	
+	@PostMapping("/buscarpor")
+	public String buscarpor(@RequestParam("busca") Optional<String> busca, @RequestParam("cadastro") Optional<String> cadastro,
+			@RequestParam("size") Optional<Integer> sizeBusca) {
+		
+		if(busca.isPresent()) {
+			if(sizeBusca.isPresent()) {
+				setSize(sizeBusca.get());
+			}
+			if(cadastro.isPresent()) {
+				try {
+					setCadastro(new SimpleDateFormat("yyyy-MM-dd").parse(cadastro.get()));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}	
+			setBusca(busca.get());
+			Pageable pageable = PageRequest.of(page, size, new Sort(Direction.DESC, "id"));
+			doacaoPage = repository.findByColaboradorNomeContainingOrCadastro(getBusca(), getCadastro(), pageable);
+			setDoacaoList(doacaoPage.getContent());
+		}
+		
+		return "redirect:/doacoes/";
+	}
+	
+	@PostMapping("/resetabusca")
+	public String resetabusca() {
+		setBusca("");
+		setCadastro(new Date());
+		initList();
+		return "redirect:/doacoes/";
 	}
 		
 	/**
@@ -167,6 +235,8 @@ public class DoacaoController {
 	}
 
 	public List<PorPaginaEnum> getPorPagina() {
+		porPagina = new ArrayList<PorPaginaEnum>();
+		porPagina.addAll(Arrays.asList(PorPaginaEnum.values()));
 		return porPagina;
 	}
 

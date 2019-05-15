@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.org.cac.enums.PorPaginaEnum;
 import br.org.cac.models.Colaborador;
@@ -154,6 +155,12 @@ public class ColaboradorController {
 		setBuscaNome("");
 		initListColaborador();
 		return "redirect:/colaboradores";
+	}
+	
+	@GetMapping("/lista-colaboradores")
+	@ResponseBody
+	public List<Colaborador> getToList(){
+		return repository.findAll();
 	}
 	
 	
