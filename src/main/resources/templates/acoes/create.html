@@ -15,7 +15,12 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js'></script>
 	<script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
-	
+	<style type="text/css">
+		.form-group{
+			margin-bottom: 10px;
+		}
+		
+	</style>
     <title>Nova Doação</title>
 
   </head>
@@ -26,7 +31,7 @@
 <br>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="javascript:void(0)">DASHBOARD</a></li>
-						<li class="breadcrumb-item ">DOAÇÕES</li>
+						<li class="breadcrumb-item ">AÇÕES</li>
 						<li class="breadcrumb-item active">NOVA</li>
 					</ol>
 				</div>
@@ -38,7 +43,7 @@
 					<div class="card-block">					
 						<div class="row">
 							<div class="col-md-10">
-								<h3 class="card-title">Adicionar Doação</h3>
+								<h3 class="card-title">Adicionar Ação</h3>
 							</div>
 							<div class="col-md-2">							
 								<a style="color: #fff" class="btn btn-danger" onclick="history.back()"><i class="fas fa-save"></i> Cancelar</a>
@@ -46,22 +51,30 @@
 						</div>	
 						<div class="row">
 							<div class="col-md-12">
-								<form class="form-material m-t-5 row" th:action="@{/doacoes/salvar}" method="POST">
-									<input type="hidden" name="id"/>
+								<form class="form-material m-t-5 row" th:action="@{/acoes/salvar}" method="POST" th:object="${acao}">
+									<input type="hidden" th:field="*{id}"/>
                                     <div class="form-group col-md-10 ">
-                                    	<label>Colaborador</label>
-                                        <select required="required" class="js-data-example-ajax form-control" id="colaborador" name="colaborador"></select>
+                                    	<label>Ação</label>
+                                        <input required="required" class="form-control form-control-line" th:field="*{nome}"/>
+                                    </div>
+                                    <div class="form-group col-md-10 ">
+                                    	<label>Descrição</label>
+                                        <input required="required" class="form-control form-control-line" th:field="*{descricao}"/>
                                     </div>
 
-                                    <div class="form-group col-md-5 ">
-                                    	<label>Data</label>
-                                        <input required="required" type="date" name="cadastro" id="cadastro" class="form-control form-control-line"> 
-                                    </div>                                     
+                                    <div class="form-group col-md-4 ">
+                                    	<label>Data de Início</label>
+                                        <input required="required" type="date" th:field="*{inicio}" class="form-control form-control-line"> 
+                                    </div>                 
+                                                        
+                                    <div class="form-group col-md-4 ">
+                                    	<label>Data de Término</label>
+                                        <input required="required" type="date" th:field="*{fim}" class="form-control form-control-line"> 
+                                    </div> 
                                     
-                                    
-                                    <div class="form-group col-md-5 ">
-                                    	<label>Valor da Doação</label>
-                                        <input required="required" type="text" name="total" id="total" class="form-control form-control-line"> 
+                                    <div class="form-group col-md-2 ">
+                                    	<label>C. H.</label>
+                                        <input required="required" type="number" th:field="*{cargaHoraria}" class="form-control form-control-line"> 
                                     </div>
                                     
                                     <div class="col-md-12">

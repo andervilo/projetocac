@@ -1,9 +1,21 @@
 package br.org.cac.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 /**
@@ -20,6 +32,7 @@ public class Acao implements Serializable {
 	private int id;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date cadastro;
 
 	private int cargaHoraria;
@@ -27,19 +40,40 @@ public class Acao implements Serializable {
 	private String descricao;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fim;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date inicio;
 
 	private String nome;
 
 	//bi-directional many-to-many association to Campanha
-	@ManyToMany(mappedBy="acaos")
+	
+	@ManyToMany
+	@JoinTable(
+		name="campanha_acao"
+		, joinColumns={
+			@JoinColumn(name="acao_id")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="campanha_id")
+			}
+		)
 	private List<Campanha> campanhas;
 
 	//bi-directional many-to-many association to Colaborador
-	@ManyToMany(mappedBy="acaos")
+	@ManyToMany
+	@JoinTable(
+		name="colaborador_acao"
+		, joinColumns={
+			@JoinColumn(name="acao_id")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="colaborador_id")
+			}
+		)
 	private List<Colaborador> colaboradors;
 
 	public Acao() {

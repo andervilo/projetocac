@@ -94,15 +94,8 @@
 				        						<input type="hidden" name="id" th:value="${colaborador.id}" />
 				        						<button title="Excluir" onclick="if (! confirm('Deseja excluir este registro?')) return false" class="btn btn-danger  btn-sm"><i class="fas fa-trash"></i></button>
 				        					</form>
-				        					<form method="POST" th:action="@{/colaboradores/campanhas}">
-				        						<button title="Campanhas" class="btn btn-primary  btn-sm"><i class="fas fa-calendar-week"></i></button>
-				        					</form>
-				        					<form method="POST" th:action="@{/colaboradores/acoes}">
-				        						<button title="Ações" class="btn btn-info btn-sm"><i class="fas fa-tasks"></i></button>
-				        					</form>
-				        					<form method="POST" th:action="@{/colaboradores/doacoes}">
-				        						<button title="Doações" class="btn btn-info btn-sm" style="background: #66bb6a; border: 1px solid #66bb6a;"><i class="fas fa-money-bill-alt"></i></button>
-				        					</form>
+				        					
+				        					
 				        				</div>
 			        				</td>
 			        			</tr>

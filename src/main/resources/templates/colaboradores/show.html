@@ -35,12 +35,12 @@
 		        			<div class="col-md-12">
 		        				<a href="/colaboradores/" class="btn btn-sm btn-success"><i class="fas fa-arrow-left"></i> Voltar para listagem</a>
 		        				<a th:href="@{/colaboradores/} + ${colaborador.id} +'/editar'" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> Editar</a>
-		        				<a th:href="@{/colaboradores/} + ${colaborador.id} +'/campanhas'" class="btn btn-sm btn-primary"><i class="fas fa-calendar-week"></i> Campanhas</a>
-		        				<a th:href="@{/colaboradores/} + ${colaborador.id} +'/acoes'" class="btn btn-sm btn-info"><i class="fas fa-tasks"></i> Ações</a>
-		        				<a th:href="@{/colaboradores/} + ${colaborador.id} +'/doacoes'" class="btn btn-sm btn-info" style="background: #66bb6a; border: 1px solid #66bb6a;"><i class="fas fa-money-bill-alt"></i> Doações</a>
+		        				
+		        				
 		        			</div>
 		        			<br> <br>
 		        			<div class="table-responsive col-md-12">
+		        			<h2>Dados do Colaborador</h2>
         					<table class="table table-sm">
         						<tbody>
         							<tr>
@@ -88,6 +88,28 @@
         							</tr>
         						</tbody>
         					</table>
+        					
+        					<h2>Ações</h2>
+        					<table class="table table-sm">
+        						<tbody>
+        							<tr th:each="acao : ${colaborador.acaos}">
+        								<td><a th:href="@{/acoes/}+${acao.id}+'/show'">[[${acao.nome}]]</a></td>
+        							</tr>
+        						</tbody>
+        					
+        					</table>
+        					
+        					<h2>Doações</h2>
+        					<table class="table table-sm">
+        						<tbody>
+        							<tr th:each="doacao : ${colaborador.doacaos}">
+        								<td width="15%">[[${#calendars.format(doacao.cadastro, 'dd/MM/yyyy')}]]</td>
+        								<td>[[${#numbers.formatCurrency(doacao.total)}]]</td>
+        							</tr>
+        						</tbody>
+        					
+        					</table>
+        					
 		        		</div>
 		        	</div>
 	        	</div>
