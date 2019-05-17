@@ -12,7 +12,15 @@ public class DashboardController {
 //		colabPage = repository.findByNomeContainingOrEmailContainingOrCelularContaining(buscaNome, buscaNome, buscaNome, pageable);
 //		
 //		setColabList(colabPage.getContent());
-		return "colaboradores/list";
+		return "dashboard";
 	}
 
+	@GetMapping("/")
+	public String index(){
+//		Pageable pageable = PageRequest.of(page, size, new Sort(Direction.DESC, "id"));
+//		colabPage = repository.findByNomeContainingOrEmailContainingOrCelularContaining(buscaNome, buscaNome, buscaNome, pageable);
+//		
+//		setColabList(colabPage.getContent());
+		return "dashboard";
+	}
 }
