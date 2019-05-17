@@ -17,6 +17,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<start-class>br.org.cac.Demo1Application</start-class>
 	</properties>
 
 	<dependencies>

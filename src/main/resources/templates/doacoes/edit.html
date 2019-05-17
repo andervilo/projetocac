@@ -10,8 +10,13 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
-
-    <title>Editar Colaborador: </title>
+<!-- 	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" /> -->
+	<link href="/css/material-select2.css" rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js'></script>
+	<script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
+	
+    <title>Nova Doação</title>
 
   </head>
     <body>
@@ -21,8 +26,8 @@
 <br>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="javascript:void(0)">DASHBOARD</a></li>
-						<li class="breadcrumb-item ">COLABORADOR</li>
-						<li class="breadcrumb-item active">EDITAR</li>
+						<li class="breadcrumb-item ">DOAÇÕES</li>
+						<li class="breadcrumb-item active">NOVA</li>
 					</ol>
 				</div>
 			</div>
@@ -30,73 +35,37 @@
 		<section layout:fragment="content">
 			<div class="col-md-10">
 				<div class="card">
-					<div class="card-block">
+					<div class="card-block">					
 						<div class="row">
 							<div class="col-md-10">
-								<h3 class="card-title">Editar Colaborador</h3>
+								<h3 class="card-title">Editar Doação</h3>
 							</div>
 							<div class="col-md-2">							
 								<a style="color: #fff" class="btn btn-danger" onclick="history.back()"><i class="fas fa-save"></i> Cancelar</a>
-							</div>
-							
-						</div>
-						
+							</div>							
+						</div>	
 						<div class="row">
 							<div class="col-md-12">
-								<form class="form-material m-t-5 row" th:action="@{/colaboradores/}+${colaborador.id}+'/salvar'" th:object="${colaborador}" method="POST">
+								<form class="form-material m-t-5 row" th:action="@{/doacoes/}+${doacao.id}+'/salvar'" method="POST" th:object="${doacao}">
 									<input type="hidden" th:field="*{id}"/>
-                                    <div class="form-group col-md-6 ">
-                                    	<label>Nome</label>
-                                        <input type="text" class="form-control form-control-line" th:field="*{nome}"> </div>
-                                        
-                                    <div class="form-group col-md-6 ">
-                                        <label>E-mail</label>
-                                        <input type="email" id="example-email2" name="example-email" class="form-control" th:field="*{email}"> </div>
-                                        
-                                    <div class="form-group col-md-4 ">
-                                    	<label>Celular</label>
-                                        <input type="text" class="form-control form-control-line" th:field="*{celular}"> </div>
-                                        
-                                    <div class="form-group col-md-4 ">
-                                    	<label>Tipo de Colaborador</label>
-                                        <select class="form-control" th:field="*{tipoPessoa}">
-                                            <option th:value="''">---Selecione---</option>
-                                            <option th:each="elem: ${T(br.org.cac.enums.TipoPessoaEnum).values()}" 
-		                                            th:value="${elem}" 
-		                                            th:text="${elem.getDescricao()}" 
-		                                            ></option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="form-group col-md-4 ">
-                                    	<label th:text="${colaborador.tipoPessoa.getValor().equals('F')} ? 'CPF':'CNPJ'">CPF/CNPJ</label>
-                                        <input type="text" class="form-control" th:field="*{cpfOuCnpj}"> </div>
-                                    
                                     <div class="form-group col-md-10 ">
-                                    	<label>Rua</label>
-                                        <input type="text" class="form-control form-control-line" th:field="*{logradouro}"> </div>
+                                    	<label>Colaborador</label>
+                                    	<input type="text" th:field="*{colaborador.nome}" disabled class="form-control form-control-line"/>
+                                    </div>
+
+                                    <div class="form-group col-md-5 ">
+                                    	<label>Data</label>
+                                        <input required="required" type="date" th:field="*{cadastro}" class="form-control form-control-line"> 
+                                    </div>                                     
                                     
-                                    <div class="form-group col-md-2 ">
-                                    	<label>Número</label>
-                                        <input type="text" class="form-control form-control-line" th:field="*{numero}"> </div>
-                                        
-                                    <div class="form-group col-md-6 ">
-                                        <label>Complemento</label>
-                                        <input type="text" class="form-control form-control-line" th:field="*{complemento}">
+                                    
+                                    <div class="form-group col-md-5 ">
+                                    	<label>Valor da Doação</label>
+                                        <input required="required" type="text" th:field="*{total}" class="form-control form-control-line"> 
                                     </div>
                                     
-                                    <div class="form-group col-md-3 ">
-                                        <label>Bairro</label>
-                                        <input type="text" class="form-control form-control-line" th:field="*{bairro}">
-                                    </div>
-                                    
-                                    <div class="form-group col-md-3 ">
-                                        <label>CEP</label>
-                                        <input type="text" class="form-control form-control-line" th:field="*{cep}">
-                                    </div>
                                     <div class="col-md-12">
-                                    	<button class="btn btn-success"><i class="fas fa-save"></i> Salvar</button>
-                                    	
+                                    	<button class="btn btn-success"><i class="fas fa-save"></i> Salvar</button>                                    	
                                     	
                                     </div>
                                 </form>
@@ -105,6 +74,9 @@
 					</div>
 				</div>
 			</div>
+			<script type="text/javascript">
+				$('#total').mask('#.##0,00', {reverse: true});		
+			</script>
 		</section>
 </body>
 </html>

@@ -1,10 +1,12 @@
 package br.org.cac;
 
+import java.util.TimeZone;
+
+import javax.annotation.PostConstruct;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
-
-import com.cmeza.sdgenerator.annotation.SDGenerator;
 
 //@SDGenerator(
 //entityPackage = "br.org.cac.models",
@@ -21,6 +23,11 @@ public class Demo1Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Demo1Application.class, args);
+	}
+	
+	@PostConstruct
+	void started() {
+	    TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 	}
 
 }

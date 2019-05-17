@@ -30,7 +30,7 @@ public class Doacao implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date cadastro;
 
 	private BigDecimal total;

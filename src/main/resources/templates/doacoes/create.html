@@ -14,8 +14,9 @@
 	<link href="/css/material-select2.css" rel="stylesheet" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js'></script>
+	<script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
 	
-    <title>Novo Colaborador: </title>
+    <title>Nova Doação</title>
 
   </head>
     <body>
@@ -49,35 +50,35 @@
 									<input type="hidden" name="id"/>
                                     <div class="form-group col-md-10 ">
                                     	<label>Colaborador</label>
-                                        <select class="js-data-example-ajax form-control"></select>
+                                        <select required="required" class="js-data-example-ajax form-control" id="colaborador" name="colaborador"></select>
                                     </div>
-                                    <div class="form-group col-md-10 ">
-                                    	<label>Colaborador2</label>
-                                        <select class="colaborador2 form-control">
-                                        	<option></option>
-                                        	<option
-                                        			th:each="c : ${colaboradores}" 
-		                                            th:value="${{c}}" 
-		                                            th:text="${c.getNome()}" 
+<!--                                     <div class="form-group col-md-10 "> -->
+<!--                                     	<label>Colaborador2</label> -->
+<!--                                         <select class="colaborador2 form-control"> -->
+<!--                                         	<option></option> -->
+<!--                                         	<option -->
+<!--                                         			th:each="c : ${colaboradores}"  -->
+<!-- 		                                            th:value="${{c}}"  -->
+<!-- 		                                            th:text="${c.getNome()}"  -->
                                         	
-                                        	></option>
-                                        </select>
-                                    </div>
+<!--                                         	></option> -->
+<!--                                         </select> -->
+<!--                                     </div> -->
                                         
 <!--                                     <div class="form-group col-md-6 "> -->
 <!--                                         <label>E-mail</label> -->
 <!--                                         <input type="text" id="example-email2" name="example-email" class="form-control" th:field="*{email}">  -->
 <!--                                         <small  class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small> -->
 <!--                                         </div> -->
-                                    <div class="form-group col-md-4 ">
-                                    	<label>Celular</label>
-                                        <input type="text" class="form-control form-control-line"> </div>
-                                        
+                                    <div class="form-group col-md-5 ">
+                                    	<label>Data</label>
+                                        <input required="required" type="date" name="cadastro" id="cadastro" class="form-control form-control-line"> 
+                                    </div>                                     
                                     
                                     
-                                    <div class="form-group col-md-10 ">
-                                    	<label>Rua</label>
-                                        <input type="text" class="form-control form-control-line"> 
+                                    <div class="form-group col-md-5 ">
+                                    	<label>Valor da Doação</label>
+                                        <input required="required" type="text" name="total" id="total" class="form-control form-control-line"> 
                                     </div>
                                     
                                     <div class="col-md-12">
@@ -92,6 +93,7 @@
 			</div>
 			<script type="text/javascript">
 // 				$(document).ready(function() {
+					$('#total').mask('#.##0,00', {reverse: true});
 					$('.colaborador2').select2({
 						minimumInputLength: 2,
 						placeholder: 'Selecione um Colaborador',
@@ -109,8 +111,6 @@
 							        var query = {
 							          search: params.term
 							        }
-
-							        // Query parameters will be ?search=[term]&type=public
 							        return query;
 							      },
 						        results: function (data) {

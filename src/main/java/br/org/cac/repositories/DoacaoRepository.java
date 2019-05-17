@@ -1,6 +1,8 @@
 package br.org.cac.repositories;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +20,20 @@ import br.org.cac.models.Doacao;
 public interface DoacaoRepository extends JpaRepository<Doacao, Integer>, JpaSpecificationExecutor<Doacao> {
 	
 	Page<Doacao> findByColaboradorNomeContainingOrCadastro(String nome, Date cadastro, Pageable pageable);
-	Page<Doacao> findByColaborador(Colaborador colaborador, Pageable pageable);
+	
+	Page<Doacao> findByColaboradorNomeContainingAndCadastro(String nome, Date cadastro, Pageable pageable);
+	
+	Page<Doacao> findByColaboradorNomeContainingAndCadastroBetween(String nome, Date dataInicial, Date dataFinal, Pageable pageable);
+	
+	Page<Doacao> findByColaboradorNomeContaining(String nome, Pageable pageable);
+	
+	Page<Doacao> findByCadastro(Date cadastro, Pageable pageable);
+	
+	Page<Doacao> findByCadastroBetween(Date dataInicial, Date dataFinal, Pageable pageable);
+	
+	List<Doacao> findByCadastro(Date cadastro);
+	
+	Page<Doacao> findByColaboradorNomeOrCadastro(Optional<String> nome, Date cadastro, Pageable pageable);
+	
 
 }
