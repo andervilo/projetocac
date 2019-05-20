@@ -31,8 +31,6 @@ public class ColaboradorRest extends AbstractRestController<Colaborador, Service
 		
 		List<Colaborador> list = colaboradorRepository.findByNomeContainingAllIgnoreCase(search);
 		
-		List<List<Map<Object, Object>>> selectList = new ArrayList<List<Map<Object, Object>>>();
-		
 		List<Map<Object, Object>> selectObject = new ArrayList<Map<Object,Object>>();
 		for(Colaborador c : list) {
 			Map<Object, Object> object = new HashMap<Object, Object>();

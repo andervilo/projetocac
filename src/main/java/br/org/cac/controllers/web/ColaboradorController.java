@@ -156,15 +156,7 @@ public class ColaboradorController {
 		initListColaborador();
 		return "redirect:/colaboradores";
 	}
-	
-	@GetMapping("/lista-colaboradores")
-	@ResponseBody
-	public List<Colaborador> getToList(){
-		return repository.findAll();
-	}
-	
-	
-	
+		
 	@PostConstruct
 	public void initListColaborador(){
 		setSize(5);
