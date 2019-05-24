@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -77,6 +78,9 @@ public class Colaborador implements Serializable {
 	private String profissao;
 
 	private String senha;
+	
+	@OneToOne(mappedBy = "colaborador")
+	private User user;
 
 	//bi-directional many-to-many association to Acao
 	@ManyToMany
@@ -249,5 +253,15 @@ public class Colaborador implements Serializable {
 
 		return doacao;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	
 
 }

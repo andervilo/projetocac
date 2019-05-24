@@ -12,7 +12,9 @@ public class MyErrorController implements ErrorController  {
  
     @RequestMapping("/error")
     public String handleError(HttpServletResponse response, Model model) {
-        model.addAttribute("error", response.getStatus());
+        //model.addAttribute("error", response.getStatus());
+        
+        if(response.getStatus() == 404) return "redirect:/404";
         return "error";
     }
  

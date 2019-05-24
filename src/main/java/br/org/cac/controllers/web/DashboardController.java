@@ -21,6 +21,6 @@ public class DashboardController {
 //		colabPage = repository.findByNomeContainingOrEmailContainingOrCelularContaining(buscaNome, buscaNome, buscaNome, pageable);
 //		
 //		setColabList(colabPage.getContent());
-		return "dashboard";
+		return "redirect:/dashboard";
 	}
 }
