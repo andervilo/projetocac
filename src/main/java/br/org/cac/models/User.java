@@ -3,7 +3,6 @@ package br.org.cac.models;
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -22,7 +21,7 @@ public class User implements Serializable {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)    
-	private Long id;
+	private int id;
 	
 	private String nome;
 	
@@ -52,7 +51,7 @@ public class User implements Serializable {
 		this.email = user.getEmail();
 	}
 
-	public User(Long id, String userName, String passWord, Colaborador colaborador, PerfilEnum role, String nome, String email) {
+	public User(int id, String userName, String passWord, Colaborador colaborador, PerfilEnum role, String nome, String email) {
 		super();
 		this.id = id;
 		this.username = userName;
@@ -63,11 +62,11 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
