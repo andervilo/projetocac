@@ -36,7 +36,7 @@ import br.org.cac.repositories.CampanhaRepository;
 import br.org.cac.repositories.ColaboradorRepository;;
 
 @Controller
-@RequestMapping("/acoes")
+@RequestMapping("/acoes") 
 public class AcaoController {
 	
 	@Autowired
