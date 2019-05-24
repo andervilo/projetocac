@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -28,8 +29,7 @@ import br.org.cac.enums.TipoPessoaEnum;
  * 
  */
 @Entity
- 
-@NamedQuery(name="Colaborador.findAll", query="SELECT c FROM Colaborador c")
+@Table(name="colaborador")
 public class Colaborador implements Serializable {
 	private static final long serialVersionUID = 1L;
 
